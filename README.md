@@ -13,7 +13,7 @@ npm run start
 npm run test
 
 # Запуск тестов с покрытием
-npm test -- --coverage --watchAll=false
+npm test -- --coverage
 ```
 
 ## Описание задания
