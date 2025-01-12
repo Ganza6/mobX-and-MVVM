@@ -1,33 +1,22 @@
-import { useState } from "react";
-import { ButtonPosition } from "../../../shared/ui/types";
+import { InputState } from "../../../shared/logic/input-state/InputState";
+import { ButtonPosition } from "../../../shared/ui/input-control/types";
+import { BUTTON_TEXT, HELLO_WORLD_TEXT } from "./constants";
 
-export function useHelloWorldViewModel() {
-    const [value, setValue] = useState("");
-
-    const clearValue = () => {
-        setValue("");
+export class HelloWorldViewModel extends InputState {
+    setHelloWorld = () => {
+        this.inputValue = HELLO_WORLD_TEXT;
     };
 
-    const setHelloWorld = () => {
-        setValue("Hello world");
-    };
-
-    const buttons = [
+    buttons = [
         {
-            text: "очистить",
-            callback: clearValue,
+            text: BUTTON_TEXT.CLEAR,
+            callback: this.clearInputValue,
             position: ButtonPosition.Right,
         },
         {
-            text: "hello world",
-            callback: setHelloWorld,
+            text: BUTTON_TEXT.HELLO_WORLD,
+            callback: this.setHelloWorld,
             position: ButtonPosition.Right,
         },
     ];
-
-    return {
-        value,
-        setValue,
-        buttons,
-    };
 }

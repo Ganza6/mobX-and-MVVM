@@ -1,14 +1,17 @@
-import InputControl from "../../../shared/ui/InputControl";
-import { useHelloWorldViewModel } from "./view-model";
+import { observer } from "mobx-react-lite";
+import { useRef } from "react";
+import InputControl from "../../../shared/ui/input-control/InputControl";
+import { HelloWorldViewModel } from "./view-model";
 
-export function HelloWorldControl() {
-    const vm = useHelloWorldViewModel();
+export const HelloWorldControl = observer(() => {
+    const vmRef = useRef(new HelloWorldViewModel());
+    const vm = vmRef.current;
 
     return (
         <InputControl
-            inputValue={vm.value}
-            handleChangeInputValue={vm.setValue}
+            inputValue={vm.inputValue}
+            handleChangeInputValue={vm.setInputValue}
             buttons={vm.buttons}
         />
     );
-}
+});

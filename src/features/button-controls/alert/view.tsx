@@ -1,14 +1,17 @@
-import InputControl from "../../../shared/ui/InputControl";
-import { useAlertViewModel } from "./view-model";
+import { observer } from "mobx-react-lite";
+import { useRef } from "react";
+import InputControl from "../../../shared/ui/input-control/InputControl";
+import { AlertViewModel } from "./view-model";
 
-export function AlertInputControl() {
-    const vm = useAlertViewModel();
+export const AlertInputControl = observer(() => {
+    const vmRef = useRef(new AlertViewModel());
+    const vm = vmRef.current;
 
     return (
         <InputControl
-            inputValue={vm.value}
-            handleChangeInputValue={vm.setValue}
+            inputValue={vm.inputValue}
+            handleChangeInputValue={vm.setInputValue}
             buttons={vm.buttons}
         />
     );
-}
+});

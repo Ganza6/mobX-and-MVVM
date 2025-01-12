@@ -1,35 +1,29 @@
-import { useState } from "react";
-import { ButtonPosition } from "../../../shared/ui/types";
+import { InputState } from "../../../shared/logic/input-state/InputState";
+import { ButtonPosition } from "../../../shared/ui/input-control/types";
+import { BUTTON_TEXT } from "./constants";
 
-export function useAlertViewModel() {
-    const [value, setValue] = useState("");
-
-    const showTextAlert = () => {
-        alert(value);
+export class AlertViewModel extends InputState {
+    showTextAlert = () => {
+        alert(this.inputValue);
     };
 
-    const showNumberAlert = () => {
-        if (Number(value)) {
-            alert(value);
+    showNumberAlert = () => {
+        const num = Number(this.inputValue);
+        if (!isNaN(num) && this.inputValue.length > 0) {
+            alert(num);
         }
     };
 
-    const buttons = [
+    buttons = [
         {
-            text: "текст alert",
-            callback: showTextAlert,
+            text: BUTTON_TEXT.TEXT_ALERT,
+            callback: this.showTextAlert,
             position: ButtonPosition.Left,
         },
         {
-            text: "number alert",
-            callback: showNumberAlert,
+            text: BUTTON_TEXT.NUMBER_ALERT,
+            callback: this.showNumberAlert,
             position: ButtonPosition.Right,
         },
     ];
-
-    return {
-        value,
-        setValue,
-        buttons,
-    };
 }

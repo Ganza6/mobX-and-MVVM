@@ -1,5 +1,5 @@
 import ButtonsList from "./ButtonsList";
-import "./style.css";
+import styles from "./InputControl.module.css";
 import { Button, ButtonPosition } from "./types";
 
 interface InputControlProps {
@@ -22,9 +22,10 @@ function InputControl({
         [];
 
     return (
-        <div className="inputControl">
+        <div className={styles.container}>
             <ButtonsList buttons={leftButtons} />
             <input
+                className={styles.input}
                 onChange={(e) => handleChangeInputValue(e.target.value)}
                 value={inputValue}
             />
